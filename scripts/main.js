@@ -12,7 +12,7 @@ let currentIndex = 0
 const onLoad = () => {
 	setTimeout(() => {
 		const js = document.querySelector(".js").classList.add("active")
-	}, 2000)
+	}, 1500)
 }
 
 window.addEventListener("load", onLoad)
@@ -75,6 +75,18 @@ const checkAnswer = () => {
 				disableClickButtons()
 			}
 		})
+		// answerBtn.addEventListener("keyup", e => {
+		// 	if (e.key == " " || e.code == "Space" || e.keyCode == 32) {
+		// 		if (answerBtn.innerText == questions[currentIndex].answer) {
+		// 			answerBtn.classList.add("correct")
+		// 			disableClickButtons()
+		// 		} else {
+		// 			answerBtn.classList.add("wrong")
+		// 			getIndexCorrectAnswer()
+		// 			disableClickButtons()
+		// 		}
+		// 	}
+		// })
 	})
 }
 
