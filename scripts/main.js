@@ -9,6 +9,14 @@ const answerButtons = document.querySelectorAll(".answer-btn")
 let questions = []
 let currentIndex = 0
 
+const onLoad = () => {
+	setTimeout(() => {
+		const js = document.querySelector(".js").classList.add("active")
+	}, 2000)
+}
+
+window.addEventListener("load", onLoad)
+
 btn.addEventListener("click", e => {
 	let x = e.clientX - e.target.offsetLeft
 	let y = e.clientY - e.target.offsetTop

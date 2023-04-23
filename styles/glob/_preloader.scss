@@ -1,0 +1,66 @@
+.js div#preloader {
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 999;
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+	background: #cca4eb;
+}
+.js {
+	transition: 0.2s all;
+
+	&.active {
+		opacity: 0;
+		pointer-events: none;
+		visibility: hidden;
+	}
+}
+/*USED A HQ IMAGE - EVENTUALLY YOU CAN PUT SVG ECC.*/
+.prel-image {
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 999;
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+	background: url("https://i.postimg.cc/X7vJHfBQ/flower.png") no-repeat center
+		center;
+	background-size: 10%;
+}
+/*THE IMAGE IS STATIC, ROTATION ADDED*/
+.preloader-rotate {
+	animation: rotation 6s linear;
+}
+
+@keyframes rotation {
+	0% {
+		scale: 20;
+		opacity: 0;
+		transform: rotate(0deg);
+	}
+
+	10% {
+		scale: 1;
+		opacity: 1;
+	}
+
+	70% {
+		transform: rotate(359deg);
+	}
+
+	95% {
+		scale: 1;
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+		scale: 40;
+		transform: rotate(-359deg);
+	}
+}
+
+/* you can switch out the preloader for whatever animated svg or animated gif you want. */
