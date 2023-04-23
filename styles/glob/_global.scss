@@ -9,13 +9,7 @@ body {
 
 // Wrapper
 .wrapper {
+	display: grid;
+	place-items: center;
 	min-height: 100vh;
-}
-
-// Container
-.container {
-	max-width: 1230px;
-	margin: 0 auto;
-
-	padding: 0 15px;
 }

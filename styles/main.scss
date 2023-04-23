@@ -1,0 +1,147 @@
+// Reset
+@import "./base/reset";
+
+// Base
+@import "./glob/global";
+@import "./glob/vars";
+
+// Mixins
+@import "./mixins/disable-mob-hover";
+
+// Effects
+@import "./ripples";
+
+body {
+	background-color: #252c4a;
+}
+
+// Btn
+.btn {
+	display: block;
+	margin: 0 auto;
+	position: relative;
+	overflow: hidden;
+
+	padding: 20px 40px;
+
+	background-color: #117eea;
+	color: #fff;
+	border-radius: 25px;
+	user-select: none;
+
+	span {
+		position: absolute;
+		background: #fff;
+		transform: translate(-50%, -50%);
+		pointer-events: none;
+		border-radius: 50%;
+		animation: animate 1s linear infinite;
+	}
+}
+
+.quiz-wrapper {
+	margin: 0 auto;
+
+	max-width: 630px;
+	width: 100%;
+	padding: 10px 15px;
+}
+
+.quiz-answers {
+	margin-bottom: 40px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+.answer-btn {
+	margin: 0 auto;
+	width: 100%;
+	display: block;
+
+	padding: 15px 20px;
+	color: #fff;
+	border: 2px solid #2a4864;
+	border-radius: 15px;
+	user-select: none;
+	text-align: left;
+	transition: border-color 0.3s;
+
+	@include hover {
+		border-color: #117eea;
+	}
+
+	span {
+		position: absolute;
+		background: #fff;
+		transform: translate(-50%, -50%);
+		pointer-events: none;
+		border-radius: 50%;
+		animation: animate 1s linear infinite;
+	}
+}
+
+button:focus-visible {
+	outline: 2px solid #fff;
+	outline-offset: 3px;
+	transition: outline-offset 100ms;
+}
+button:focus-visible:active {
+	outline-offset: 0px;
+}
+
+.quiz-top {
+	margin-bottom: 30px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+	color: #fff;
+}
+.quiz-count {
+	margin-bottom: 20px;
+	text-align: center;
+	color: #8d93b7;
+}
+.question-index {
+}
+.question-length {
+	padding-left: 5px;
+	border-left: 1px solid #fff;
+	font-size: 12px;
+}
+.quiz-text-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.quiz-title {
+}
+.trans {
+	position: relative;
+	padding: 0 15px;
+	font-style: italic;
+	&::after,
+	&::before {
+		content: "|";
+		position: absolute;
+	}
+	&::after {
+		right: 0;
+	}
+	&::before {
+		left: 0;
+	}
+}
+
+// Animations
+
+@keyframes animate {
+	0% {
+		width: 0;
+		height: 0;
+		opacity: 0.5;
+	}
+	100% {
+		width: 500px;
+		height: 500px;
+		opacity: 0;
+	}
+}

@@ -1,7 +1,7 @@
 @mixin hover {
-  @media (any-hover: hover) {
-    &:hover {
-      @content;
-    }
-  }
+	@media (hover: hover) and (pointer: fine) {
+		&:hover {
+			@content;
+		}
+	}
 }
