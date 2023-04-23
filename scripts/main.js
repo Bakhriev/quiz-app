@@ -1,6 +1,13 @@
 import axios from "axios"
+import { baseUrl } from "./url"
 
 const btn = document.querySelector(".btn")
+const answerButtons = document.querySelectorAll(".answer-btn")
+// Dom Elements
+
+//
+let questions = []
+let currentIndex = 0
 
 btn.addEventListener("click", e => {
 	let x = e.clientX - e.target.offsetLeft
@@ -16,16 +23,87 @@ btn.addEventListener("click", e => {
 	}, 1000)
 })
 
-const getData = async (page = "") => {
-	const url = new URL("https://6325daa94cd1a2834c45d03c.mockapi.io/questions")
-	url.searchParams.append("page", 1)
-	url.searchParams.append("limit", 10)
-	console.log(url)
-	const data = await axios
-		.get("https://6325daa94cd1a2834c45d03c.mockapi.io/questions")
-		.then(res => {
-			return res.data
-		})
+const getData = async (page = 1, limit = 10) => {
+	const url = new URL(baseUrl)
+	url.searchParams.append("page", page)
+	url.searchParams.append("limit", limit)
+
+	const data = await axios.get(url).then(res => {
+		return res.data
+	})
+	questions = data
+	initQuestion()
 }
+
+const initQuestion = () => {
+	const questionIndexDom = document.querySelector(".question-index")
+	const questionLengthDom = document.querySelector(".question-length")
+	const questionTitleDom = document.querySelector(".quiz-title")
+	const questionTransDom = document.querySelector(".trans")
+
+	questionIndexDom.innerText = currentIndex + 1
+	questionLengthDom.innerText = questions?.length
+	questionTitleDom.innerText = questions[currentIndex]?.title
+	questionTransDom.innerText = questions[currentIndex]?.trans
+
+	answerButtons.forEach((btn, index) => {
+		btn.innerText = questions[currentIndex]?.answers[index]
+	})
+
+	if (currentIndex == 9) {
+		btn.style.pointerEvents = "none"
+	}
+}
+
+const checkAnswer = () => {
+	answerButtons.forEach((answerBtn, index) => {
+		answerBtn.addEventListener("click", () => {
+			if (answerBtn.innerText == questions[currentIndex].answer) {
+				answerBtn.classList.add("correct")
+				disableClickButtons()
+			} else {
+				answerBtn.classList.add("wrong")
+				getIndexCorrectAnswer()
+				disableClickButtons()
+			}
+		})
+	})
+}
+
+const getIndexCorrectAnswer = () => {
+	answerButtons.forEach(l => {
+		if (l.innerText === questions[currentIndex].answer) {
+			l.classList.add("correct")
+		}
+	})
+}
+
+const removeStateButtons = () => {
+	answerButtons.forEach(a => {
+		a.classList.remove("correct")
+		a.classList.remove("wrong")
+	})
+}
+
+const disableClickButtons = () => {
+	answerButtons.forEach(b => {
+		b.style.pointerEvents = "none"
+	})
+}
+
+const enableClickButtons = () => {
+	answerButtons.forEach(b => {
+		b.style.pointerEvents = "auto"
+	})
+}
+
+checkAnswer()
+
+btn.addEventListener("click", () => {
+	currentIndex++
+	initQuestion()
+	removeStateButtons()
+	enableClickButtons()
+})
 
 getData()
