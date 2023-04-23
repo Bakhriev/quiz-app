@@ -3,7 +3,13 @@ import { baseUrl } from "./url"
 
 const btn = document.querySelector(".btn")
 const answerButtons = document.querySelectorAll(".answer-btn")
+const resetButton = document.querySelector(".reset")
+const userSelected = document.querySelector(".user-selected")
 // Dom Elements
+document.querySelector(".correct-answers").innerText = "123"
+//
+let correctAnswers = 0
+let wrongAnswers = 0
 
 //
 let questions = []
@@ -33,6 +39,17 @@ btn.addEventListener("click", e => {
 
 const focusBtn = () => {
 	answerButtons[0].focus()
+}
+
+const userSelectedInit = () => {
+	const colvo = document.querySelector(".colvo")
+	const countCorrectAnswers = document.querySelector(".correct-answers")
+	const countWrongAnswers = document.querySelector(".wrong-answers")
+	console.log(colvo, countCorrectAnswers, countWrongAnswers)
+
+	colvo.innerText = questions.length
+	countCorrectAnswers.innerText = correctAnswers
+	countWrongAnswers.innerText = wrongAnswers
 }
 
 const getData = async (page = 1, limit = 20) => {
@@ -68,16 +85,41 @@ const initQuestion = () => {
 	}
 }
 
+resetButton.addEventListener("click", () => {
+	currentIndex = 0
+	initQuestion()
+	removeStateButtons()
+	enableClickButtons()
+	focusBtn()
+	btn.disabled = false
+	btn.style.pointerEvents = "auto"
+	userSelected.classList.remove("active")
+	correctAnswers = 0
+	wrongAnswers = 0
+})
+
 const checkAnswer = () => {
 	answerButtons.forEach((answerBtn, index) => {
 		answerBtn.addEventListener("click", () => {
 			if (answerBtn.innerText == questions[currentIndex].answer) {
 				answerBtn.classList.add("correct")
 				disableClickButtons()
+				correctAnswers++
+				console.log("render correct")
+				if (currentIndex == questions.length - 1) {
+					userSelectedInit()
+					userSelected.classList.add("active")
+				}
 			} else {
 				answerBtn.classList.add("wrong")
 				getIndexCorrectAnswer()
 				disableClickButtons()
+				wrongAnswers++
+				console.log("render wrong")
+				if (currentIndex == questions.length - 1) {
+					userSelectedInit()
+					userSelected.classList.add("active")
+				}
 			}
 		})
 		answerBtn.addEventListener("keyup", e => {

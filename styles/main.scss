@@ -134,6 +134,59 @@ body {
 	}
 }
 
+.user-selected {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	position: fixed;
+	z-index: 10;
+	top: 50%;
+	left: 50%;
+	max-width: 350px;
+	width: 100%;
+	transform: translate(-50%, -50%);
+	color: #fff;
+	background-color: #2a4864;
+	padding: 30px 30px;
+	border-radius: 15px;
+	font-size: 20px;
+	opacity: 0;
+	scale: 0;
+	visibility: hidden;
+	transition: 0.2s all;
+	&.active {
+		opacity: 1;
+		scale: 1;
+		visibility: visible;
+	}
+}
+.correct-answers {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+.wrong-answers {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+.user-selected-title {
+	display: flex;
+	gap: 5px;
+	margin: 0 auto;
+}
+
+.reset {
+	position: absolute;
+	color: #fff;
+	right: 10px;
+	top: 10px;
+	background-color: #4bc281;
+	border-radius: 5px;
+	font-size: 12px;
+	padding: 5px 10px;
+}
+
 // Animations
 
 @keyframes animate {
