@@ -35,7 +35,7 @@ const focusBtn = () => {
 	answerButtons[0].focus()
 }
 
-const getData = async (page = 1, limit = 10) => {
+const getData = async (page = 1, limit = 20) => {
 	const url = new URL(baseUrl)
 	url.searchParams.append("page", page)
 	url.searchParams.append("limit", limit)
@@ -62,7 +62,7 @@ const initQuestion = () => {
 		btn.innerText = questions[currentIndex]?.answers[index]
 	})
 
-	if (currentIndex == 9) {
+	if (currentIndex == questions.length - 1) {
 		btn.style.pointerEvents = "none"
 		btn.disabled = true
 	}
