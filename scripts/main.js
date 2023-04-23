@@ -31,6 +31,10 @@ btn.addEventListener("click", e => {
 	}, 1000)
 })
 
+const focusBtn = () => {
+	answerButtons[0].focus()
+}
+
 const getData = async (page = 1, limit = 10) => {
 	const url = new URL(baseUrl)
 	url.searchParams.append("page", page)
@@ -60,6 +64,7 @@ const initQuestion = () => {
 
 	if (currentIndex == 9) {
 		btn.style.pointerEvents = "none"
+		btn.disabled = true
 	}
 }
 
@@ -75,18 +80,18 @@ const checkAnswer = () => {
 				disableClickButtons()
 			}
 		})
-		// answerBtn.addEventListener("keyup", e => {
-		// 	if (e.key == " " || e.code == "Space" || e.keyCode == 32) {
-		// 		if (answerBtn.innerText == questions[currentIndex].answer) {
-		// 			answerBtn.classList.add("correct")
-		// 			disableClickButtons()
-		// 		} else {
-		// 			answerBtn.classList.add("wrong")
-		// 			getIndexCorrectAnswer()
-		// 			disableClickButtons()
-		// 		}
-		// 	}
-		// })
+		answerBtn.addEventListener("keyup", e => {
+			if (e.key == " " || e.code == "Space" || e.keyCode == 32) {
+				if (answerBtn.innerText == questions[currentIndex].answer) {
+					answerBtn.classList.add("correct")
+					disableClickButtons()
+				} else {
+					answerBtn.classList.add("wrong")
+					getIndexCorrectAnswer()
+					disableClickButtons()
+				}
+			}
+		})
 	})
 }
 
@@ -108,12 +113,14 @@ const removeStateButtons = () => {
 const disableClickButtons = () => {
 	answerButtons.forEach(b => {
 		b.style.pointerEvents = "none"
+		b.disabled = true
 	})
 }
 
 const enableClickButtons = () => {
 	answerButtons.forEach(b => {
 		b.style.pointerEvents = "auto"
+		b.disabled = false
 	})
 }
 
@@ -124,6 +131,7 @@ btn.addEventListener("click", () => {
 	initQuestion()
 	removeStateButtons()
 	enableClickButtons()
+	focusBtn()
 })
 
 getData()
