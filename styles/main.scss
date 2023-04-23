@@ -45,6 +45,7 @@ body {
 	user-select: none;
 	text-align: left;
 	transition: border-color 0.3s, background-color 0.2s;
+	text-transform: capitalize;
 
 	@include hover {
 		border-color: #117eea;
@@ -101,6 +102,10 @@ body {
 	margin-top: 1px;
 	font-size: 15px;
 }
+.quiz-title {
+	text-transform: capitalize;
+}
+
 .quiz-text-wrapper {
 	display: flex;
 	align-items: center;
