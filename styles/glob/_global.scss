@@ -13,3 +13,37 @@ body {
 	place-items: center;
 	min-height: 100vh;
 }
+
+// Btn
+.btn {
+	display: block;
+	margin: 0 auto;
+	position: relative;
+	overflow: hidden;
+
+	padding: 20px 40px;
+
+	background-color: #117eea;
+	color: #fff;
+	border-radius: 25px;
+	user-select: none;
+
+	span {
+		position: absolute;
+		background: #fff;
+		transform: translate(-50%, -50%);
+		pointer-events: none;
+		border-radius: 50%;
+		animation: animate 1s linear infinite;
+	}
+}
+
+button:focus-visible {
+	outline: 2px solid #fff;
+	outline-offset: 3px;
+	transition: outline-offset 100ms;
+}
+
+button:focus-visible:active {
+	outline-offset: 0px;
+}
